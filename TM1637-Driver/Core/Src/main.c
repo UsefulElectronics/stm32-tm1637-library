@@ -56,7 +56,10 @@ static void MX_I2C1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+uint8_t	Timer1Enable = ENABLE;
+uint32_t Timer1  = 0;
+uint8_t CurrentDisplay[4] = {0};
+uint8_t tm1637_Segments[8] = {0};
 /* USER CODE END 0 */
 
 /**
@@ -66,7 +69,15 @@ static void MX_I2C1_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+  //DP is connected to the second digit MSB
+  tm1637_Segments[0] = A_SEG;
+  tm1637_Segments[1] = B_SEG;
+  tm1637_Segments[2] = C_SEG;
+  tm1637_Segments[3] = D_SEG;
+  tm1637_Segments[4] = E_SEG;
+  tm1637_Segments[5] = F_SEG;
+  tm1637_Segments[6] = G_SEG;
+  tm1637_Segments[7] = DP_SEG;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -91,45 +102,25 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_GPIO_WritePin(SCLK_GPIO_Port, SCLK_Pin, GPIO_PIN_SET);
   HAL_GPIO_WritePin(SDO_GPIO_Port, SDO_Pin, GPIO_PIN_SET);
-  uint8_t buffer[10] = {0};
-//  buffer[0] = DATA_SET;
-//  buffer[1] = C0H;
-//  buffer[2] = 0xFF;
-//  buffer[3] = DISPLAY_ON;
-//  tm1637_TxData(1, buffer, 1);
-  buffer[0] = DATA_SET;
-  tm1637_TxCommand(buffer);
-  tm1637_EndPacket();
-  buffer[0] = C0H;
-//  HAL_Delay(1);
-//  HAL_GPIO_WritePin(SCLK_GPIO_Port, SCLK_Pin, GPIO_PIN_RESET);
-  tm1637_TxCommand(buffer);
-  buffer[0] = 0x7C;
-  buffer[1] = 0x79;
-  buffer[2] = 0x7C;
-  buffer[3] = 0x04;
-//  HAL_Delay(1);
-//  tm1637_SartPacket();
-  tm1637_TxData(1, buffer, 4);
-  tm1637_EndPacket();
-  buffer[0] = DISPLAY_ON;
-//  HAL_Delay(1);
-  tm1637_TxCommand(buffer);
 
-  tm1637_EndPacket();
-//  HAL_GPIO_WritePin(SDO_GPIO_Port, SDO_Pin, GPIO_PIN_SET);
+  tm1637_DisplayHandle(7, CurrentDisplay);						//
 
-//  buffer[0] = C0H;
-//  buffer[1] = 0xAA;
-//  buffer[2] = DISPLAY_ON;
-//  HAL_I2C_Master_Transmit(&hi2c1, DATA_SET>>1, buffer, 3, 5);
-
+  Timer1Enable = ENABLE;										//Turn on systick based timer
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+	  if(HAL_GetTick() >= 10000)
+	  {
+		  tm1637_DisplayClear();
+	  }
+	  else
+	  {
+		  tm1637_Effect(80);
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

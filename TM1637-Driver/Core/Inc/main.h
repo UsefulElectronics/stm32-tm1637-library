@@ -36,7 +36,6 @@ extern "C" {
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
 
 /* USER CODE END ET */
 
@@ -47,7 +46,8 @@ extern "C" {
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
-
+#define ENABLE			1
+#define	DISABLE			2
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/

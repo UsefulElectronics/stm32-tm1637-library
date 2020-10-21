@@ -1,0 +1,16 @@
+TM1637.c:19:6:tm1637_CLKhigh	8	static
+TM1637.c:25:6:tm1637_CLKlow	8	static
+TM1637.c:31:6:tm1637_SDOhigh	8	static
+TM1637.c:37:6:tm1637_SDOlow	8	static
+TM1637.c:43:6:tm1637_StartPacket	8	static
+TM1637.c:52:6:tm1637_EndPacket	8	static
+TM1637.c:60:6:tm1637_DataOut	24	static
+TM1637.c:79:6:tm1637_TxCommand	32	static
+TM1637.c:102:6:tm1637_TxData	32	static
+TM1637.c:122:6:tm1637_Initialize	32	static
+TM1637.c:142:6:tm1637_ACKcheck	8	static
+TM1637.c:150:6:tm1637_DisplayClear	16	static
+TM1637.c:162:9:tm1637_DisplayHandle	24	static
+TM1637.c:183:22:tm1637_SetBrighness	32	static
+TM1637.c:206:6:tm1637_Effect	16	static
+TM1637.c:277:9:char2segments	16	static

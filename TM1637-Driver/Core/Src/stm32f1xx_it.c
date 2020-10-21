@@ -27,7 +27,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
-
+extern uint8_t	Timer1Enable;
+extern uint32_t Timer1;
 /* USER CODE END TD */
 
 /* Private define ------------------------------------------------------------*/
@@ -182,7 +183,14 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
-
+	if(Timer1Enable)
+	{
+		Timer1++;
+	}
+	else
+	{
+		Timer1 = 0;
+	}
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
   /* USER CODE BEGIN SysTick_IRQn 1 */
